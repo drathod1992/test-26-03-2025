@@ -12,6 +12,15 @@ Ensure you have the following installed before starting the project:
 ```sh
 git clone <repo-url>
 
+## Navigate to Backend Directory
+cd backend
+
+##Install Dependencies for server
+npm install
+
+## Start backend server
+npm start
+
 ## Navigate to Frontend Directory
 cd frontend
 
@@ -20,3 +29,6 @@ npm install
 
 ##Start the Project
 npm start
+
+##Run the Test Case
+npm run test

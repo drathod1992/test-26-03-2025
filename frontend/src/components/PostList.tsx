@@ -1,8 +1,8 @@
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
 import { fetchPostsRequest, updatePost } from "../slices/postSlice";
+import { RootState } from "../store/store";
 import "./postList.css";
-
 import {
   TextField,
   Pagination,
@@ -22,8 +22,6 @@ import {
   Paper,
 } from "@mui/material";
 import { Post } from "../types";
-import React from "react";
-import { RootState } from "../store/store";
 
 const PAGE_SIZE = 5;
 
@@ -44,19 +42,20 @@ const PostList = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const filtered = data.filter((post: Post) =>
-      post.title.toLowerCase().includes(search.toLowerCase())
+    setFilteredPosts(
+      data.filter((post: Post) =>
+        post.title.toLowerCase().includes(search.toLowerCase())
+      )
     );
-    setFilteredPosts(filtered);
     setCurrentPage(1);
   }, [search, data]);
 
   const handleEdit = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    if (selectedPost) {
-      setSelectedPost({ ...selectedPost, [e.target.name]: e.target.value });
-    }
+    setSelectedPost((prev) =>
+      prev ? { ...prev, [e.target.name]: e.target.value } : prev
+    );
   };
 
   const saveEdit = () => {
@@ -64,35 +63,38 @@ const PostList = () => {
     setOpen(false);
   };
 
-  const paginatedPosts = filteredPosts.slice(
-    (currentPage - 1) * PAGE_SIZE,
-    currentPage * PAGE_SIZE
-  );
-
   const handleClickOpen = (post: Post) => {
     setSelectedPost(post);
     setOpen(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleClose = () => setOpen(false);
+
+  const paginatedPosts = filteredPosts.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE
+  );
+
   return (
-    <div className="postListMain">
+    <div
+      className="postListMain"
+      style={{ backgroundColor: "#f9f9f9", padding: "20px" }}
+    >
       <h2>All Posts</h2>
       <Input
         placeholder="Search Post"
         onChange={(e) => setSearch(e.target.value)}
+        className="search-input"
       />
 
-      {search ? <h2>Search Post List</h2> : <h2>Post List</h2>}
+      <h2>{search ? "Search Post List" : "Post List"}</h2>
 
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
         <p>Error: {error}</p>
       ) : (
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} sx={{ backgroundColor: "#fff" }}>
           <Table>
             <TableHead>
               <TableRow>
@@ -125,7 +127,7 @@ const PostList = () => {
         className="pagination"
         showFirstButton
         showLastButton
-        variant="outlined" 
+        variant="outlined"
         color="primary"
         shape="rounded"
       />
@@ -146,7 +148,6 @@ const PostList = () => {
             onChange={handleEdit}
           />
           <TextField
-            autoFocus
             margin="dense"
             id="body"
             name="body"

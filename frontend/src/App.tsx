@@ -1,7 +1,7 @@
 import "./App.css";
 import PostList from "./components/PostList";
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "./store/store";
 
 function App() {
   return (

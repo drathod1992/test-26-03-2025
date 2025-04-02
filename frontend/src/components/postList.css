@@ -1,17 +1,17 @@
-.editPost {
-    display: grid;
-    width: max-content;
-    justify-self: center;
-    justify-items: center;
-
-    button {
-        width: fit-content;
-        margin-top: 10px;
-    }
+.postListMain{
+    padding: 24px;
+    text-align: start;
 }
 
-.postListItem {
-    border: 1px solid #c4c4c4;
-    padding: 5px;
-    list-style-type: none;
+ul{
+    padding-left: 10px;
+}
+
+.pagination{
+    margin-top: 12px;
+}
+
+th{
+    font-size: medium !important;
+    font-weight: 600 !important;
 }

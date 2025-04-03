@@ -1,0 +1,49 @@
+$primary-color: #394e60;
+$text-color: rgb(62, 59, 59);
+
+.body {
+    color: $primary-color !important;
+}
+
+.postListMain {
+    padding: 24px;
+    text-align: start;
+}
+
+ul {
+    padding-left: 10px;
+}
+
+.pagination {
+    margin-top: 25px;
+}
+
+th {
+    font-size: medium !important;
+    font-weight: 600 !important;
+    color: $primary-color !important;
+}
+
+td {
+    color: $text-color !important;
+}
+
+.titleInput {
+    margin-bottom: 20px !important;
+}
+
+.searchInput {
+    width: 20%;
+    margin-bottom: 15px;
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+    .searchInput {
+        width: 100% !important;
+    }
+
+    .pagination {
+        justify-items: center !important;
+    }
+}

@@ -1,12 +1,11 @@
-import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import createSagaMiddleware from "redux-saga";
 import { RootState } from "../../store/store";
-import PostList from "../PostList";
 import { fetchPostsRequest, updatePost } from "../../slices/postSlice";
-import mockPosts from "../test/_mocks_/mockData.json"
+import mockPosts from "./_mocks_/mockData.json";
+import PostList from "./PostList";
 
 // Setup Redux mock store with Saga middleware
 const sagaMiddleware = createSagaMiddleware();
@@ -31,7 +30,7 @@ describe("PostList Component", () => {
       </Provider>
     );
 
-    expect(screen.getByText(/All Posts/i)).toBeInTheDocument();
+    expect(screen.getByText(/Search/i)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/Search Post/i)).toBeInTheDocument();
   });
 
